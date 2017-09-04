@@ -8,9 +8,30 @@ import * as BooksAPI from './BooksAPI';
 
 class BooksApp extends React.Component {
   state = {
-    books: [],
     searchedBooks: [],
-    groupedBooks: []
+    groupedBooks: [],
+    shelves: [
+      {
+          label: 'Move to ...',
+          value: 'none'
+      },
+      {
+          label: 'Currently Reading',
+          value: 'currentlyReading'
+      },
+      {
+          label: 'Want to Read',
+          value: 'wantToRead'
+      },
+      {
+          label: 'Read',
+          value: 'read'
+      },
+      {
+          label: 'None',
+          value: 'none'
+      }
+    ]
   };
 
   /**
@@ -38,8 +59,6 @@ class BooksApp extends React.Component {
       BooksAPI.search(qString, 10).then((books) => {
           if (_.isArray(books)) {
               this.setState({searchedBooks: books});
-              let booksCollection = this.state.books.concat(books);
-              this.setState({books: booksCollection});
           }
     });
   };
@@ -57,11 +76,18 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         <Route exact path="/" render={() => (
-            <BooksList books={this.state.groupedBooks} onShelfUpdate={this.shelfUpdate} />
+            <BooksList
+                books={this.state.groupedBooks}
+                onShelfUpdate={this.shelfUpdate}
+                shelves={this.state.shelves} />
         )} />
 
         <Route path="/search" render={() => (
-            <BooksSearch onSearch={this.searchBooks} searchedBooks={this.state.searchedBooks} onShelfUpdate={this.shelfUpdate} />
+            <BooksSearch
+                onSearch={this.searchBooks}
+                searchedBooks={this.state.searchedBooks}
+                onShelfUpdate={this.shelfUpdate}
+                shelves={this.state.shelves} />
         )} />
       </div>
     );

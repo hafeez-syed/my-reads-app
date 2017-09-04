@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import BooksGrid from './BooksGrid'
 
 class BooksSearch extends Component {
     updateQuery = (queryString) => {
@@ -17,7 +18,7 @@ class BooksSearch extends Component {
     };
 
     render() {
-        const {searchedBooks} = this.props;
+        const {searchedBooks, shelves} = this.props;
         return (
             <div className="search-books">
                 <div className="search-books-bar">
@@ -40,26 +41,7 @@ class BooksSearch extends Component {
                     </div>
                 </div>
             <div className="search-books-results">
-                <ol className="books-grid">
-                    {searchedBooks && searchedBooks.map((book) => (
-                        <li key={book.id} className="contact-list-item">
-                            <div className="book-top">
-                                <div className="book-cover" style={{width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})`}}></div>
-                                <div className="book-shelf-changer">
-                                    <select onChange={(event) => this.changeHandler(book, event.target.value)}>
-                                        <option value="none">Move to...</option>
-                                        <option value="currentlyReading">Currently Reading</option>
-                                        <option value="wantToRead">Want to Read</option>
-                                        <option value="read">Read</option>
-                                        <option value="none">None</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="book-title truncate">{book.title}</div>
-                            <div className="book-authors truncate">{book.authors && book.authors.join(',')}</div>
-                        </li>
-                    ))}
-                </ol>
+                <BooksGrid booksCollection={searchedBooks} shelves={shelves} changeHandler={this.changeHandler} />
             </div>
         </div>
         );
