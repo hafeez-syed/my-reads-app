@@ -14,11 +14,11 @@ $ npm start
 
 ## What You're Getting
 ```bash
-├── .gitignore - any files/folders mentioned in this file will be ignored (will not be tracked) during git operations
-├── CONTRIBUTING.md - Although this file may not be relevant for this project however this usually set the rules/quidelines on how to contribute to a project
+├── .gitignore - # any files/folders mentioned in this file will be ignored (will not be tracked) during git operations
+├── CONTRIBUTING.md - # Although this file may not be relevant for this project however this usually set the rules/quidelines on how to contribute to a project
 ├── package.json # npm package manager file.
 ├── package-lock.json # This is somewhat simialr to npm-shrinkwrap.json file but with some different attributes.
-├── README.md - This file.
+├── README.md - # This file.
 ├── SEARCH_TERMS.md # The whitelisted short collection of available search terms for you to use with your app.
 ├── node_modules # This folder contains all npm packages and their dependencies
 ├── public
