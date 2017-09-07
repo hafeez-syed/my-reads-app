@@ -9,8 +9,10 @@ import * as BooksAPI from './BooksAPI';
 class BooksApp extends React.Component {
   state = {
     searchedBooks: [],
-    groupedBooks: [],
-    shelves: [
+    groupedBooks: []
+  };
+
+  shelves = [
       {
           label: 'Move to ...',
           value: 'none'
@@ -31,8 +33,7 @@ class BooksApp extends React.Component {
           label: 'None',
           value: 'none'
       }
-    ]
-  };
+  ];
 
   /**
   * Call get all books api when component is rendered
@@ -55,7 +56,6 @@ class BooksApp extends React.Component {
   * Search filtered books
   */
   searchBooks = (qString) => {
-      this.setState({searchedBooks: []});
       BooksAPI.search(qString, 10).then((books) => {
           if (_.isArray(books)) {
               this.setState({searchedBooks: books});
@@ -79,7 +79,7 @@ class BooksApp extends React.Component {
             <BooksList
                 books={this.state.groupedBooks}
                 onShelfUpdate={this.shelfUpdate}
-                shelves={this.state.shelves} />
+                shelves={this.shelves} />
         )} />
 
         <Route path="/search" render={() => (
@@ -87,7 +87,7 @@ class BooksApp extends React.Component {
                 onSearch={this.searchBooks}
                 searchedBooks={this.state.searchedBooks}
                 onShelfUpdate={this.shelfUpdate}
-                shelves={this.state.shelves} />
+                shelves={this.shelves} />
         )} />
       </div>
     );
