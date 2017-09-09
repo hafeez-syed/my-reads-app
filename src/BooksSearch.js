@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import BooksGrid from './BooksGrid'
 
@@ -47,5 +48,10 @@ class BooksSearch extends Component {
         );
     }
 }
+
+BooksSearch.propTypes = {
+    shelves: PropTypes.array.isRequired,
+    searchedBooks: PropTypes.array.isRequired
+};
 
 export default BooksSearch;

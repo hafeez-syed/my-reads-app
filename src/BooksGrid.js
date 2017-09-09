@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class BooksGrid extends Component {
     render() {
@@ -29,5 +30,10 @@ class BooksGrid extends Component {
         )
     }
 }
+
+BooksGrid.propTypes = {
+    shelves: PropTypes.array.isRequired,
+    changeHandler: PropTypes.func.isRequired
+};
 
 export  default BooksGrid

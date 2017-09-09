@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import BooksShelf from './BooksShelf';
 
-function BooksList(props) {
+const BooksList = (props) => {
     /**
      * Call changeEvent handler on selection change
      *
@@ -34,6 +35,11 @@ function BooksList(props) {
             </div>
         </div>
     )
-}
+};
+
+BooksList.propTypes = {
+    books: PropTypes.object.isRequired,
+    shelves: PropTypes.array.isRequired
+};
 
 export default  BooksList;

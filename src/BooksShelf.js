@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import BooksGrid from './BooksGrid'
 
-function BooksShelf(props) {
+const BooksShelf = (props) => {
     const booksCollection = props.booksCollection;
     const shelves = props.shelves;
     const changeHandler = props.changeHandler;
@@ -15,6 +16,12 @@ function BooksShelf(props) {
             </div>
         </div>
     )
-}
+};
 
-export  default BooksShelf
+BooksShelf.propTypes = {
+    shelves: PropTypes.array.isRequired,
+    changeHandler: PropTypes.func.isRequired,
+    title: PropTypes.string.isRequired
+};
+
+export  default BooksShelf;

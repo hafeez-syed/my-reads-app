@@ -9,7 +9,7 @@ import * as BooksAPI from './BooksAPI';
 class BooksApp extends React.Component {
   state = {
     searchedBooks: [],
-    groupedBooks: []
+    groupedBooks: {}
   };
 
   shelves = [
@@ -59,6 +59,7 @@ class BooksApp extends React.Component {
       BooksAPI.search(qString, 10).then((books) => {
           if (_.isArray(books)) {
               this.setState({searchedBooks: books});
+              this.matchShelves();
           }
     });
   };
@@ -68,8 +69,54 @@ class BooksApp extends React.Component {
   */
   shelfUpdate = (book, shelf) => {
       BooksAPI.update(book, shelf).then(() => {
-          this.getAllBooks();
+          this.removeBookFromShelf(book);
+          book.shelf = shelf;
+          this.addBookToShelf(book, shelf)
       });
+  };
+
+  /**
+   * Remove book object from the shelf array
+   *
+   * @param book
+   */
+  removeBookFromShelf = (book) => {
+      _.remove(this.state.groupedBooks[book.shelf], {id: book.id});
+  };
+
+  /**
+   * Add book object to the shelf array
+   *
+   * @param book
+   */
+  addBookToShelf = (book) => {
+      let books = this.state.groupedBooks;
+      books[book.shelf].push(book);
+      this.setState({groupedBooks: books});
+      this.matchShelves();
+  };
+
+  /**
+   * If books are searched, then update their shelf state if:
+   * 1 - they have been moved to their shelves from Search page to list page
+   * 2 - they have been moved on the same list page
+   */
+  matchShelves = () => {
+      if(this.state.searchedBooks && _.isArray(this.state.searchedBooks) && this.state.searchedBooks.length) {
+          let grpBooks = this.state.groupedBooks;
+          let searchedBooks = this.state.searchedBooks;
+
+          _.forIn(grpBooks, (value, key) => {
+              _.forEach(value, (val) => {
+                  _.map(searchedBooks, (book) => {
+                      if(book.id === val.id) {
+                          book.shelf = val.shelf;
+                      }
+                  });
+              });
+          });
+          this.setState({searchedBooks: searchedBooks});
+      }
   };
 
   render() {
