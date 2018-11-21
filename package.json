@@ -1,19 +1,23 @@
 {
   "dependencies": {
-    "lodash": "4.17.4",
+    "lodash": "4.17.5",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-router-dom": "4.2.2",
-    "react-scripts": "0.9.5"
+    "react-scripts": "2.0.0",
+    "snyk": "^1.110.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "devDependencies": {
     "eslint-config-google": "0.9.1"
-  }
+  },
+  "snyk": true
 }
