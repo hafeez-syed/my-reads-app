@@ -6,7 +6,7 @@
     "react-dom": "^16.8.6",
     "react-router-dom": "5.0.0",
     "react-scripts": "3.0.0",
-    "snyk": "^1.153.0"
+    "snyk": "^1.192.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -14,7 +14,8 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "snyk-protect": "snyk protect",
-    "prepare": "npm run snyk-protect"
+    "prepare": "npm run snyk-protect",
+    "prepublish": "npm run snyk-protect"
   },
   "devDependencies": {
     "eslint-config-google": "0.12.0"
