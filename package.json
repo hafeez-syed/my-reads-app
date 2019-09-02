@@ -15,6 +15,5 @@
   },
   "devDependencies": {
     "eslint-config-google": "0.13.0"
-  },
-  "snyk": true
+  }
 }
